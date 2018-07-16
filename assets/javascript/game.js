@@ -16,7 +16,8 @@ $( document ).ready(function() {
     var userImg;
     var userName;
     var otherCharacters;
-
+    
+   
     var enemyHP;
     var enemyAttack;
     var enemyCounter;
@@ -28,8 +29,8 @@ var sprites = {
     "walker": {
         name: "walker",
         image: "assets/images/walker.jpg",
-        health: 22,
-        attack: 13,
+        health: 12,
+        attack: 3,
         counter: 5,
     },
 
@@ -58,6 +59,9 @@ var sprites = {
     },
 };
 
+// var count1 = sprites.keys.length;
+// console.log(count1 + " this is object length");
+
 
     $("#welcome-btn").on("click", function() {
         $(".container-welcome").hide();
@@ -68,10 +72,10 @@ var sprites = {
         $(".container-loss").hide();
 
         function displaySprite(pass) {
-            var boxName = $("<div>").attr("data-name", pass.name).attr("data-health",pass.health).attr("data-attack", pass.attack).attr("data-counter", pass.counter).addClass("sprite", "text-center");
+            var boxName = $("<div>").attr("data-name", pass.name).attr("data-health",pass.health).attr("data-attack", pass.attack).attr("data-counter", pass.counter).attr("data-img", pass.image).addClass("sprite", "text-center");
             var boxTitle = $("<p>").addClass("title", "text-center").text(pass.name);
             var boxPic = $("<img>").attr("src", pass.image).addClass("sprite-img", "text-center");
-            var boxInfo = $("<p>").addClass("info", "text-center");
+            var boxInfo = $("<p>").addClass("info", "text-center").text("Health: " + pass.health);
             boxName.append(boxTitle).append(boxPic).append(boxInfo);
             $("#start-select").append(boxName);
         };
@@ -90,10 +94,10 @@ var sprites = {
         userHP = parseInt($(this).attr("data-health"));
         userAttack = parseInt($(this).attr("data-attack"));
         userCounter = parseInt($(this).attr("data-counter"));
-        userName = $(this).attr("value");
-        
-        // console.log(typeof(userHP));
-        
+        userName = $(this).attr("data-name");
+        userImg = $(this).attr("data-img");
+
+                
         $(this).detach().appendTo(".userSprite-game");
         
 
@@ -109,93 +113,101 @@ var sprites = {
         $(".container-loss").hide();
     });
 
-// // pick first enemy 
+// pick first enemy 
 
-// $(".container-select-enemy").on("click", ".sprite",  function() {
+$(".container-select-enemy").on("click", ".sprite",  function() {
         
-//     enemyHP = parseInt($(this).attr("data-health"));
-//     enemyAttack = parseInt($(this).attr("data-attack"));
-//     enemyCounter = parseInt($(this).attr("data-counter"));
-//     enemyName = $(this).attr("value");
+    enemyHP = parseInt($(this).attr("data-health"));
+    enemyAttack = parseInt($(this).attr("data-attack"));
+    enemyCounter = parseInt($(this).attr("data-counter"));
+    enemyName = $(this).attr("data-name");
+    enemyImg = $(this).attr("data-img");
+    console.log("this is enemyImg: " + enemyImg);
     
    
 
-//     $(this).detach().appendTo(".enemySprite-game");
+    $(this).detach().appendTo(".enemySprite-game");
     
     
-//     $(".container-welcome").hide();
-//     $(".container-select-user").hide();
-//     $(".container-select-enemy").hide();
-//     $(".container-game").show();
-//     $(".container-win").hide();
-//     $(".container-loss").hide();
-// });
+    $(".container-welcome").hide();
+    $(".container-select-user").hide();
+    $(".container-select-enemy").hide();
+    $(".container-game").show();
+    $(".container-win").hide();
+    $(".container-loss").hide();
+});
+
+    // attack area 
+
+    $("#attack").on("click", function() {
+        console.log("this is enemyName: " + enemyName + "user name: " + userName);
+        enemyHP -= userAttack;
+        userHP -= enemyCounter;
+        userAttack += userAttack;
 
 
-//     $("#attack").on("click", function() {
-//         console.log("this is enemyName: " + enemyName + "user name: " + userName);
-//         enemyHP -= userAttack;
-//         userHP -= enemyCounter;
-//         userAttack += userAttack;
+        $(".user .info").text("Helath: " + userHP);
+        $(".enemy .info").text("Health: " + enemyHP);
 
-//         // console.log("User HP: " + userHP + "  Attack: " + userAttack + "  counter: " + userCounter + "  name: " + userName);
+        console.log("enemy Image: " + enemyImg);
+            // if statements for the game 
+        if (userHP < 0) {
+            console.log("what");
+            gameOver = true;
+            $(".container-loss").show();
+            $(".container-game").hide();
+            var losser = $(".loss-img");
+            var losserTitle = $("#loss-name");
+            setImage(losser, enemyImg, losserTitle, userName);
 
-//         // console.log("Enemy HP: " + enemyHP + "  Attack: " + enemyAttack + "  counter: " + enemyCounter + "  name: " + enemyName);
+        } else if (enemyHP < 0) {
+            nextEnemy = true;
+            count--;
 
-//         // userImg = $(".user .sprite-img").attr("src");
-//         // console.log("this is img src: " + userImg);
+            if (count === 0) {
+                $(".container-win").show()
+                $(".container-game").hide();
+                var winner = $(".winning-img");
+                var winnerTitle = $("#win-name");
+                setImage(winner, userImg, winnerTitle, userName);
 
-//         // enemyImg = $(".enemy .sprite-img").attr("src");
-//         // console.log("this is enemy img src: " + enemyImg);
+            } else {
+                $(".enemySprite-game").empty();
+                $(".container-select-enemy").show();
+                $(".container-game").hide();
 
-//         $(".user .info").text("HP: " + userHP);
-//         $(".enemy .info").text("HP: " + enemyHP);
-
-
-//             // if statements for the game 
-//         if (userHP < 0) {
-//             gameOver = true;
-//             $(".container-loss").show();
-//             $(".container-game").hide();
-//             var losser = $(".loss-img");
-//             setImage(losser, enemyName);
-
-//         } else if (enemyHP < 0) {
-//             nextEnemy = true;
-//             count--;
-
-//             if (count === 0) {
-//                 $(".container-win").show()
-//                 $(".container-game").hide();
-//                 var winner = $(".winning-img");
-//                 setImage(winner, userName);
-
-//             } else {
-//                 $(".enemySprite-game").empty();
-//                 $(".container-select-enemy").show();
-//                 $(".container-game").hide();
-
-//             }
+            }
             
-//         }
+        }
        
+        function setImage(a,b,x,y) {
+            a.attr("src", b);
+            x.text(y);
 
-//         function setImage(y,x) { //l
-//             // console.log("this is enemyName: " + enemyName + "user name: " + userName);
+        };
+
+
+
+
+
+
+
+        // function setImage(y,x) { //l
+        //     // console.log("this is enemyName: " + enemyName + "user name: " + userName);
             
           
-//             if (x === "sprite-1") {
-//                 $(y).attr("src", "assets/images/walker.jpg");
-//             } else if (x === "sprite-2") {
-//                 $(y).attr("src", "assets/images/cb.jpg");
-//             } else if (x === "sprite-3") {
-//                 $(y).attr("src", "assets/images/trivette.jpg");
-//             } else if (x === "sprite-4") {
-//                 $(y).attr("src", "assets/images/gage.jpg");
-//             }
-//         };
+        //     if (x === "sprite-1") {
+        //         $(y).attr("src", "assets/images/walker.jpg");
+        //     } else if (x === "sprite-2") {
+        //         $(y).attr("src", "assets/images/cb.jpg");
+        //     } else if (x === "sprite-3") {
+        //         $(y).attr("src", "assets/images/trivette.jpg");
+        //     } else if (x === "sprite-4") {
+        //         $(y).attr("src", "assets/images/gage.jpg");
+        //     }
+        // };
 
-//     });
+    });
 
 //     function reset() {
 //         $(".container-welcome").show();
