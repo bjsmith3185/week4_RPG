@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+    <title>Role Playing Game</title>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css' integrity='sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp' crossorigin='anonymous'>
+    <link rel='stylesheet' href='assets/css/reset.css'>
+    <link rel='stylesheet' href='assets/css/style.css'>
+</head>
+<body>
+
+    
+<div class="container-welcome">
+    <div class="row">
+        <div class=col-xs-12>
+            <div class="top-welcome"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="welcome-img-area text-center">
+                <img class="welcome-img" src="assets/images/banner3.jpg">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button class="btn btn-default btn-lg" id="welcome-btn">Start Game</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-select-user">
+
+    <div class="row">
+        <div class="col-xs-12 select-top text-center" >
+            Select your player.
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="start-select"></div>
+        </div>
+    </div>
+
+    <!-- <div class="row">
+        <div class="col-xs-3 text-center" id="row1-col1">
+            <div class="sprite sprite-1-container text-center" id="sprite-1" value="sprite-1" data-health="22" data-attack="13" data-counter="2" data-info="info-1">
+                <p class="title-1 text-center" >Walker</p>
+                <img class="sprite-img sprite-1" src="assets/images/walker.jpg">
+                <p class="info info-1 text-center"></p>
+            </div>
+        </div>
+        <div class="col-xs-3 text-center"></div>
+        <div class="col-xs-3 text-center">
+            <div class="sprite sprite-3-container text-center" id="sprite-3" value="sprite-3" data-health="9" data-attack="4" data-counter="4">
+                <p class="title-3 text-center" >Trivette</p>
+                <img class="sprite-img sprite-3" src="assets/images/trivette.jpg">
+                <p class="info info-3 text-center"></p>
+            </div>
+        </div>
+        <div class="col-xs-3 text-center"></div>
+    </div>
+
+
+    <div class="row">
+            <div class="col-xs-3 text-center"></div>
+            <div class="col-xs-3 text-center">
+                <div class="sprite sprite-2-container text-center" id="sprite-2" value="sprite-2" data-health="15" data-attack="2" data-counter="3">
+                    <p class="title-2 text-center" >C.B.</p>
+                    <img class="sprite-img sprite-2" src="assets/images/cb.jpg">
+                    <p class="info info-2 text-center"></p>
+                </div>
+            </div>
+            <div class="col-xs-3 text-center"></div>
+            <div class="col-xs-3 text-center">
+                <div class="sprite sprite-4-container text-center" id="sprite-4" value="sprite-4" data-health="11" data-attack="3" data-counter="3">
+                    <p class="title-4 text-center" >Gage</p>
+                    <img class="sprite-img sprite-4" src="assets/images/gage.jpg">
+                    <p class="info info-4 text-center"></p>
+                </div>
+            </div>
+        </div> -->
+</div>
+
+
+<div class="container-select-enemy">
+    <div class="row">
+        <div class="col-xs-12 text-center enemy-title">
+            Select your enemy!
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <div class="enemy-list"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-game">
+    <div class="row">
+        <div class="col-xs-12 text-center game-title" >
+            Click the Attack button to play.
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 text-center">
+            <div class="user userSprite-game"></div>
+        </div>
+
+        <div class="col-xs-4 text-center">
+            <button class="btn-lg" id="attack">Attack!</button>
+        </div>
+
+        <div class="col-xs-4 text-center">
+            <div class="enemy enemySprite-game"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-win text-center">
+    <div class="row">
+        <div class="col-xs-12 win-title">
+            Great Job!
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6 text-center">
+            <div class="win-img-area text-center">
+                <img class="winning-img" src="">
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row">
+        <div class="col-xs-12 text-center">
+            <div class="reset-btn-area">
+                <button class="btn btn-default btn-lg" id="reset-win">Play Again</button>
+            </div>
+        </div>
+    </div> -->
+</div>
+
+
+
+<div class="container-loss text-center">
+    <div class="row">
+        <div class="col-xs-12 loss-title">
+            <p id="loss-title">Try Harder!</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6 text-center">
+            <div class="loss-img-area text-center">
+                <img class="loss-img" src="">
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row">
+        <div class="col-xs-12 text-center">
+            <div class="reset-btn-area">
+                <button class="btn btn-default btn-lg" id="reset-loss">Play Again</button>
+            </div>
+        </div>
+    </div> -->
+</div>
+
+
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script type='text/javascript' src='assets/javascript/game.js'></script>
+</body>
+</html>
