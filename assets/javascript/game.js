@@ -13,8 +13,8 @@ $( document ).ready(function() {
         "walker": {
             name: "walker",
             image: "assets/images/walker.jpg",
-            health: 12,
-            attack: 3,
+            health: 112,
+            attack: 113,
             counter: 5,
         },
     
@@ -43,22 +43,15 @@ $( document ).ready(function() {
         },
     };
 
-    console.log("walker's health: " + sprites["walker"].health);
-
-    var userSelected = false;
     var userHP;
     var userAttack;
-    // var userCounter;
     var userImg;
     var userName;
     var otherCharacters;
-    
-   
     var enemyHP;
-    // var enemyAttack;
     var enemyCounter;
     var enemyName;
-
+    var enemyImg;
     var count = 3;
 
 // reset function 
@@ -71,20 +64,18 @@ $( document ).ready(function() {
         $(".container-loss").hide();
         
         $("#start-select").empty();
-        $(".userSprite-game").empty();
+        $(".enemy-list").empty();   
         
         userHP;
         userAttack;
         userImg;
         userName;
         otherCharacters;
-
         enemyHP;
         enemyCounter;
         enemyName;
+        enemyImg;
         count = 3;
-
-
     };
 
 
@@ -108,34 +99,25 @@ $( document ).ready(function() {
         $(".container-game").hide();
         $(".container-win").hide();
         $(".container-loss").hide();
-        
-        
-      
-      
+
         for (var key in sprites) {
           displaySprite(sprites[key]);
         };
-
     });
 
 // pick users sprite area 
 
     $(".container-select-user").on("click", ".sprite", function() {
-        
         userHP = parseInt($(this).attr("data-health"));
         userAttack = parseInt($(this).attr("data-attack"));
-        // userCounter = parseInt($(this).attr("data-counter"));
         userName = $(this).attr("data-name");
         userImg = $(this).attr("data-img");
-
                 
         $(this).detach().appendTo(".userSprite-game");
-        
-
+      
         otherCharacters = $(".sprite").not(this);
         $(otherCharacters).detach().appendTo(".enemy-list");
-                // console.log(otherCharacters); 
-        
+         
         $(".container-welcome").hide();
         $(".container-select-user").hide();
         $(".container-select-enemy").show();
@@ -147,18 +129,12 @@ $( document ).ready(function() {
 // pick first enemy 
 
     $(".container-select-enemy").on("click", ".sprite",  function() {
-            
         enemyHP = parseInt($(this).attr("data-health"));
-        // enemyAttack = parseInt($(this).attr("data-attack"));
         enemyCounter = parseInt($(this).attr("data-counter"));
         enemyName = $(this).attr("data-name");
         enemyImg = $(this).attr("data-img");
-        console.log("this is enemyImg: " + enemyImg);
-        
-    
-
+      
         $(this).detach().appendTo(".enemySprite-game");
-        
         
         $(".container-welcome").hide();
         $(".container-select-user").hide();
@@ -171,20 +147,17 @@ $( document ).ready(function() {
 // attack area 
 
     $("#attack").on("click", function() {
-        console.log("this is enemyName: " + enemyName + "user name: " + userName);
+        // math for determining health points 
         enemyHP -= userAttack;
         userHP -= enemyCounter;
         userAttack += userAttack;
 
-
         $(".user .info").text("Helath: " + userHP);
         $(".enemy .info").text("Health: " + enemyHP);
 
-        console.log("enemy Image: " + enemyImg);
-            // if statements for the game 
-        if (userHP < 0) {
-            console.log("what");
-            gameOver = true;
+        if (userHP < 0) {  // enemy wins
+            $(".userSprite-game").empty();  
+            $(".enemySprite-game").empty();
             $(".container-loss").show();
             $(".container-game").hide();
             var losser = $(".loss-img");
@@ -192,34 +165,35 @@ $( document ).ready(function() {
             setImage(losser, enemyImg, losserTitle, userName);
 
         } else if (enemyHP < 0) {
-            nextEnemy = true;
             count--;
 
-            if (count === 0) {
+            if (count === 0) {  // you win 
+                $(".enemySprite-game").empty()   
+                $(".userSprite-game").empty();
                 $(".container-win").show()
                 $(".container-game").hide();
                 var winner = $(".winning-img");
                 var winnerTitle = $("#win-name");
                 setImage(winner, userImg, winnerTitle, userName);
 
-            } else {
+                var audioElement = document.createElement("audio");
+                audioElement.setAttribute("src", "assets/sound/TexasRanger.mp3");
+                audioElement.play();
+
+            } else {  // enemy defeated with more to choose from
                 $(".enemySprite-game").empty();
                 $(".container-select-enemy").show();
                 $(".container-game").hide();
-
             };
             
         };
        
+        // displays the name and image of winner or loser 
         function setImage(a,b,x,y) {
             a.attr("src", b);
             x.text(y);
-
         };
-       
-
     });
-
     
     $("#reset-win").on("click", function() {
         reset();

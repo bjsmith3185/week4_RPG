@@ -154,6 +154,10 @@ body {
     border: 2px solid red;
 }
 
+#reset-win,
+#reset-loss {
+    background: rgb(250, 213, 3);
+}
 
 
 /* loss screen  */
