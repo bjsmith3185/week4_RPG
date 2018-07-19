@@ -13,9 +13,9 @@ $( document ).ready(function() {
         "walker": {
             name: "walker",
             image: "assets/images/walker.jpg",
-            health: 112,
-            attack: 113,
-            counter: 5,
+            health: 1012,
+            attack: 5,
+            counter: 120,
         },
     
         "trivette": {
@@ -29,7 +29,7 @@ $( document ).ready(function() {
         "cb": {
             name: "cb",
             image: "assets/images/cb.jpg",
-            health: 10,
+            health: 12,
             attack: 8,
             counter: 5,
         },
@@ -37,7 +37,7 @@ $( document ).ready(function() {
         "gage": {
             name: "gage",
             image: "assets/images/gage.jpg",
-            health: 12,
+            health: 16,
             attack: 7,
             counter: 4,
         },
@@ -154,6 +154,11 @@ $( document ).ready(function() {
 
         $(".user .info").text("Helath: " + userHP);
         $(".enemy .info").text("Health: " + enemyHP);
+
+        var audioElement = document.createElement("audio");
+        audioElement.setAttribute("src", "assets/sound/whack.mp3");
+        audioElement.play();
+
 
         if (userHP < 0) {  // enemy wins
             $(".userSprite-game").empty();  
