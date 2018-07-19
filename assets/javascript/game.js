@@ -95,11 +95,7 @@ $( document ).ready(function() {
     $("#welcome-btn").on("click", function() {
         $(".container-welcome").hide();
         $(".container-select-user").show();
-        // $(".container-select-enemy").hide();
-        // $(".container-game").hide();
-        // $(".container-win").hide();
-        // $(".container-loss").hide();
-
+      
         for (var key in sprites) {
           displaySprite(sprites[key]);
         };
@@ -117,13 +113,9 @@ $( document ).ready(function() {
       
         otherCharacters = $(".sprite").not(this);
         $(otherCharacters).detach().appendTo(".enemy-list");
-         
-        // $(".container-welcome").hide();
+       
         $(".container-select-user").hide();
         $(".container-select-enemy").show();
-        // $(".container-game").hide();
-        // $(".container-win").hide();
-        // $(".container-loss").hide();
     });
 
 // pick first enemy 
@@ -136,12 +128,8 @@ $( document ).ready(function() {
       
         $(this).detach().appendTo(".enemySprite-game");
         
-        // $(".container-welcome").hide();
-        // $(".container-select-user").hide();
         $(".container-select-enemy").hide();
         $(".container-game").show();
-        // $(".container-win").hide();
-        // $(".container-loss").hide();
     });
 
 // attack area 
